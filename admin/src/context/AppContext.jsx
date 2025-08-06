@@ -1,16 +1,9 @@
 import { createContext } from "react";
-import { doctors } from "../assets/assets";
 
-// Create an
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  const currencySymbol = "$";
-  const value = {
-    doctors,
-    currencySymbol,
-  };
-
+  const value = {};
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
