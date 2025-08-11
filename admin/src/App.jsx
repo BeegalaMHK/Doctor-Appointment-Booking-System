@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // Toast to show notification.
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 // Pages
 import Login from "./pages/Login";
 // Context
