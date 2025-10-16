@@ -16,7 +16,7 @@ const MyProfile = () => {
       const formData = new FormData();
       formData.append("name", userData.name);
       formData.append("phone", userData.phone);
-      formData.append("address", JSON.stringify(userData.name));
+      formData.append("address", JSON.stringify(userData.address));
       formData.append("gender", userData.gender);
       formData.append("dob", userData.dob);
 
@@ -120,11 +120,14 @@ const MyProfile = () => {
                   type="text"
                   onChange={(e) =>
                     setUserData((prev) => ({
-                      ...prev.address,
-                      line1: e.target.value,
+                      ...prev,
+                      address: {
+                        ...prev.address,
+                        line1: e.target.value,
+                      },
                     }))
                   }
-                  value={userData.address.line1}
+                  value={userData?.address?.line1}
                 />
                 <br />
                 <input
@@ -132,11 +135,14 @@ const MyProfile = () => {
                   type="text"
                   onChange={(e) =>
                     setUserData((prev) => ({
-                      ...prev.address,
-                      line2: e.target.value,
+                      ...prev,
+                      address: {
+                        ...prev.address,
+                        line2: e.target.value,
+                      },
                     }))
                   }
-                  value={userData.address.line2}
+                  value={userData?.address?.line2}
                 />
               </p>
             ) : (
