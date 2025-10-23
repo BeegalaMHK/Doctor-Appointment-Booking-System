@@ -113,6 +113,7 @@ const MyAppointments = () => {
       toast.error(error.message);
     }
   };
+
   useEffect(() => {
     if (token) {
       getUserAppointment();
