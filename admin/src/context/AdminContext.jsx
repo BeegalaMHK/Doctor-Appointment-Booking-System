@@ -6,11 +6,12 @@ export const AdminContext = createContext();
 
 const AdminContextProvider = (props) => {
   const [aToken, setAToken] = useState(
-    localStorage?.getItem("aToken") ? localStorage?.getItem("aToken") : ""
+    localStorage?.getItem("aToken") ? localStorage?.getItem("aToken") : "",
   );
 
   const [doctors, setDoctors] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [dashData, setDashData] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -21,7 +22,7 @@ const AdminContextProvider = (props) => {
         {},
         {
           headers: { aToken },
-        }
+        },
       );
       if (data?.success) {
         setDoctors(data?.doctors);
@@ -41,7 +42,7 @@ const AdminContextProvider = (props) => {
         { docId },
         {
           headers: { aToken },
-        }
+        },
       );
       if (data?.success) {
         toast.success(data?.message);
@@ -79,13 +80,29 @@ const AdminContextProvider = (props) => {
         { appointmentId },
         {
           headers: { aToken },
-        }
+        },
       );
       if (data?.success) {
         toast.success(data?.message);
         getAllAppointments();
       } else {
         toast.error(data?.message);
+      }
+    } catch (error) {
+      toast.error(error?.message);
+      console.log(error);
+    }
+  };
+  const getDashData = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/admin/dashboard", {
+        headers: { aToken },
+      });
+      if (data?.success) {
+        setDashData(data?.dashData);
+      } else {
+        toast.error(data?.message);
+        setDashData(false);
       }
     } catch (error) {
       toast.error(error?.message);
@@ -105,6 +122,8 @@ const AdminContextProvider = (props) => {
     appointments,
     setAppointments,
     cancelAppointment,
+    dashData,
+    getDashData,
   };
   return (
     <AdminContext.Provider value={value}>

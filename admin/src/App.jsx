@@ -14,35 +14,43 @@ import Dashboard from "./pages/Admin/Dashboard";
 import AllAppointment from "./pages/Admin/AllAppointment";
 import AddDoctor from "./pages/Admin/AddDoctor";
 import DoctorsList from "./pages/Admin/DoctorsList";
+import { DoctorContext } from "./context/DoctorContext";
+import DoctorDashboard from "./pages/Doctors/DoctorDashboard";
+import DoctorAppointments from "./pages/Doctors/DoctorAppointments";
+import DoctorProfile from "./pages/Doctors/DoctorProfile";
 
 function App() {
   const { aToken } = useContext(AdminContext);
+  const { dToken } = useContext(DoctorContext);
 
-  if (!aToken)
-    return (
-      <div>
-        <Login />
-        <ToastContainer />
+  return !!aToken || !!dToken ? (
+    <div className="bg-[#F8F9FD]">
+      {/* <Login /> */}
+      <ToastContainer />
+      <Navbar />
+      <div className="flex items-start">
+        <Siderbar />
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/" element={<></>} />
+          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/all-appointments" element={<AllAppointment />} />
+          <Route path="/add-doctor" element={<AddDoctor />} />
+          <Route path="/doctor-list" element={<DoctorsList />} />
+
+          {/* Doctor Routes */}
+          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+          <Route path="/doctor-appointments" element={<DoctorAppointments />} />
+          <Route path="/doctor-profile" element={<DoctorProfile />} />
+        </Routes>
       </div>
-    );
-  if (!!aToken)
-    return (
-      <div className="bg-[#F8F9FD]">
-        {/* <Login /> */}
-        <ToastContainer />
-        <Navbar />
-        <div className="flex items-start">
-          <Siderbar />
-          <Routes>
-            <Route path="/" element={<></>} />
-            <Route path="/admin-dashboard" element={<Dashboard />} />
-            <Route path="/all-appointments" element={<AllAppointment />} />
-            <Route path="/add-doctor" element={<AddDoctor />} />
-            <Route path="/doctor-list" element={<DoctorsList />} />
-          </Routes>
-        </div>
-      </div>
-    );
+    </div>
+  ) : (
+    <div>
+      <Login />
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default App;
