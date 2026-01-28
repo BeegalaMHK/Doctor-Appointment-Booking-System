@@ -35,7 +35,8 @@ const AllAppointment = () => {
         {appointments.map((item, index) => (
           <div
             key={index}
-            className="flex flex-wrap justify-between max-sm:gap-2 sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] grid-flow-col py-3 px-6 border-b items-center text-gray-500 py-3 px-6 hover:bg-gray-50"
+            className="flex flex-wrap justify-between max-sm:gap-2 sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] 
+            grid-flow-col py-3 px-6 border-b items-center text-gray-500 py-3 px-6 hover:bg-gray-50"
           >
             <p className="max-sm:hidden">{index + 1}</p>
             <div className="flex items-center gap-2">
