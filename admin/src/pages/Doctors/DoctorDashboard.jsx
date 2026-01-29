@@ -4,10 +4,8 @@ import { assets } from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
 
 const DoctorDashboard = () => {
-  const { dToken, dashData, setDashData, getDashData } =
-    useContext(DoctorContext);
+  const { dToken, dashData, getDashData } = useContext(DoctorContext);
   const { currency, slotDateFormat } = useContext(AppContext);
-  console.log(dashData);
 
   useEffect(() => {
     if (dToken) {
@@ -27,7 +25,7 @@ const DoctorDashboard = () => {
             <div>
               <p className="text-xl font-semibold text-gray-600">
                 {currency}
-                {dashData?.earning}
+                {dashData?.earnings}
               </p>
               <p className="text-gray-400">Earnings</p>
             </div>
